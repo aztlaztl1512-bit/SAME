@@ -376,8 +376,6 @@
         .icon-writing { background: linear-gradient(135deg, #8b5cf6, #4c1d95); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
         .icon-exam { background: linear-gradient(135deg, #ef4444, #991b1b); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
         .icon-textbook { background: linear-gradient(135deg, #059669, #047857); box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3); }
-        .icon-pdf { background: linear-gradient(135deg, #ec4899, #be185d); box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3); }
-        .icon-summary { background: linear-gradient(135deg, #a855f7, #6b21a8); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
 
         .card:hover .icon-box { transform: rotateY(360deg); }
 
@@ -522,9 +520,6 @@
         .btn-view { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
         .btn-view:hover { background: #38bdf8; color: #000; }
 
-        .btn-download { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .btn-download:hover { background: #10b981; color: #000; }
-
         .status-badge {
             font-size: 0.8rem;
             padding: 4px 10px;
@@ -645,11 +640,8 @@
             <div class="pdf-item">
                 <span><i class="fas fa-file-pdf" style="color: #059669; margin-left: 8px;"></i> كتاب القرآن الكريم وتفسيره - أول ثانوي مسارات (1448)</span>
                 <div class="pdf-actions">
-                    <a href="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" class="btn-action btn-view" target="_blank" onclick="markCompleted('pdf-textbook')">
-                        <i class="fas fa-eye"></i> معاينة وقراءة PDF
-                    </a>
-                    <a href="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" class="btn-action btn-download" download="1448-GE-CBM-TRC1-SM1-QTFSR.pdf" target="_blank" onclick="markCompleted('pdf-textbook')">
-                        <i class="fas fa-download"></i> تحميل
+                    <a href="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" class="btn-action btn-view" target="_blank" onclick="markCompleted('pdf-textbook')">
+                        <i class="fas fa-eye"></i> معاينة وقراءة الكتاب (موقع واجباتي/منهجي)
                     </a>
                 </div>
             </div>
@@ -664,22 +656,22 @@
             <button class="close-btn" onclick="closeModal('unit1-modal')">&times;</button>
         </div>
         <div class="links-list">
-            <a class="model-link" data-id="u1-d1" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u1-d1" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الأول: التعريف بعلم التفسير ونشأته</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u1-d2" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u1-d2" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثاني: أهمية علم التفسير وضوابطه</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u1-d3" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u1-d3" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثالث: أبرز المؤلفات الموثوقة في التفسير</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u1-d4" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u1-d4" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الرابع: التقنية في خدمة القرآن الكريم وتفسيره</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
@@ -695,22 +687,22 @@
             <button class="close-btn" onclick="closeModal('unit2-modal')">&times;</button>
         </div>
         <div class="links-list">
-            <a class="model-link" data-id="u2-d5" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u2-d5" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الخامس: تفسير سورة الفاتحة</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u3-d6" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u3-d6" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس السادس: تفسير سورة يونس (من آية 3 إلى 10)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u3-d7" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u3-d7" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس السابع: تفسير سورة يونس (من آية 26 إلى 33)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u3-d8" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u3-d8" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثامن: تفسير سورة يونس (من آية 62 إلى 70)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
@@ -726,22 +718,22 @@
             <button class="close-btn" onclick="closeModal('unit4-5-modal')">&times;</button>
         </div>
         <div class="links-list">
-            <a class="model-link" data-id="u4-d9" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u4-d9" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس التاسع: تفسير سورة هود (من آية 96 إلى 108)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u4-d10" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u4-d10" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس العاشر: تفسير سورة هود (من آية 112 إلى 123)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u5-d11" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u5-d11" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الحادي عشر: تفسير سورة يوسف (من آية 46 إلى 57)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u5-d12" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u5-d12" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثاني عشر: تفسير سورة يوسف (من آية 102 إلى 111)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
@@ -757,32 +749,32 @@
             <button class="close-btn" onclick="closeModal('unit6-7-8-modal')">&times;</button>
         </div>
         <div class="links-list">
-            <a class="model-link" data-id="u6-d13" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u6-d13" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثالث عشر: تفسير سورة الرعد (من 8 إلى 15)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u6-d14" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u6-d14" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الرابع عشر: تفسير سورة الرعد (من 19 إلى 29)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u7-d15" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u7-d15" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الخامس عشر: تفسير سورة إبراهيم (من 24 إلى 31)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u7-d16" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u7-d16" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس السادس عشر: تفسير سورة إبراهيم (من 42 إلى 52)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u8-d17" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u8-d17" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس السابع عشر: تفسير سورة الحجر (من 28 إلى 50)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u8-d18" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u8-d18" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثامن عشر: تفسير سورة الحجر (من 85 إلى 99)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
@@ -798,37 +790,37 @@
             <button class="close-btn" onclick="closeModal('unit9-10-modal')">&times;</button>
         </div>
         <div class="links-list">
-            <a class="model-link" data-id="u9-d19" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u9-d19" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس التاسع عشر: تفسير سورة النحل (من 10 إلى 18)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u9-d20" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u9-d20" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%D9%87-%D9%85%D8%B3%D8%A7%D8%B1%D8%A7%D8%AA/" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس العشرون: تفسير سورة النحل (من 112 إلى 117)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u9-d21" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u9-d21" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A7%D8%B في تفسير..." data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الحادي والعشرون: تفسير سورة النحل (من 120 إلى 128)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u10-d22" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u10-d22" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A7%D8%B في تفسير..." data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثاني والعشرون: تفسير سورة الإسراء (من 23 إلى 30)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u10-d23" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u10-d23" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A7%D8%B في تفسير..." data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الثالث والعشرون: تفسير سورة الإسراء (من 31 إلى 39)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u10-d24" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u10-d24" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A7%D8%B في تفسير..." data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الرابع والعشرون: تفسير سورة الإسراء (من 78 إلى 87)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
             </a>
-            <a class="model-link" data-id="u10-d25" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+            <a class="model-link" data-id="u10-d25" data-url="https://www.mnhaji.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A7%D8%B في تفسير..." data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
                 <span><i class="fas fa-file-signature"></i> الدرس الخامس والعشرون: تفسير سورة الإسراء (من 105 إلى 111)</span>
                 <span class="countdown-timer"></span>
                 <span class="status-box"></span>
@@ -842,7 +834,6 @@
 </div>
 
 <script>
-    // إعدادات Firebase من لوحة القيادة الخاصة بك
     const firebaseConfig = {
         apiKey: "AIzaSyBkCO7FDQXd89YDf843J4_AtvEFvzzt-R0",
         authDomain: "aztlg-494c3.firebaseapp.com",
@@ -854,41 +845,28 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // الاستماع اللحظي لوحة الشرف
     function initLeaderboard() {
         db.collection("alkfaeat_results").onSnapshot(snapshot => {
             let studentsMap = {};
-
             snapshot.forEach(doc => {
                 let data = doc.data();
                 if (!data.name || data.score === undefined || !data.total) return;
-
                 let pct = Math.round((data.score / data.total) * 100);
-                
                 if (!studentsMap[data.name] || pct > studentsMap[data.name].pct) {
-                    studentsMap[data.name] = {
-                        name: data.name,
-                        score: data.score,
-                        total: data.total,
-                        pct: pct
-                    };
+                    studentsMap[data.name] = { name: data.name, score: data.score, total: data.total, pct: pct };
                 }
             });
-
             let sortedList = Object.values(studentsMap).sort((a, b) => b.pct - a.pct);
             let topStudents = sortedList.slice(0, 6);
-
             const container = document.getElementById('leaderboardList');
             if (topStudents.length === 0) {
                 container.innerHTML = `<div style="color: var(--text-sub);">لا توجد نتائج مسجلة حتى الآن. كن أول الأبطال! 🌟</div>`;
                 return;
             }
-
             let html = "";
             topStudents.forEach((st, index) => {
                 let rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
                 let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '⭐';
-
                 html += `
                     <div class="leader-card">
                         <div class="leader-info">
@@ -899,7 +877,6 @@
                     </div>
                 `;
             });
-
             container.innerHTML = html;
         });
     }
@@ -930,20 +907,13 @@
         const endTimeStr = element.getAttribute('data-end');
         const now = new Date();
 
-        if (startTimeStr) {
-            const startTime = new Date(startTimeStr);
-            if (now < startTime) {
-                alert(`سيكون هذا الرابط متاحاً قريباً بإذن الله ⏳\nموعد الفتح: ${startTime.toLocaleString('ar-SA')}`);
-                return;
-            }
+        if (startTimeStr && now < new Date(startTimeStr)) {
+            alert(`سيكون هذا الرابط متاحاً قريباً بإذن الله ⏳`);
+            return;
         }
-
-        if (endTimeStr) {
-            const endTime = new Date(endTimeStr);
-            if (now > endTime) {
-                alert('عذراً، انتهت الفترة المحددة لهذا الرابط وهو مغلق حالياً 🔒');
-                return;
-            }
+        if (endTimeStr && now > new Date(endTimeStr)) {
+            alert('عذراً، انتهت الفترة المحددة لهذا الرابط وهو مغلق حالياً 🔒');
+            return;
         }
 
         if (itemId) markCompleted(itemId);
@@ -972,13 +942,11 @@
     function updateAllBadges() {
         const links = document.querySelectorAll('.model-link');
         const now = new Date();
-
         links.forEach(link => {
             const startStr = link.getAttribute('data-start');
             const endStr = link.getAttribute('data-end');
             const statusBox = link.querySelector('.status-box');
             const timerBox = link.querySelector('.countdown-timer');
-            
             if (!statusBox || !timerBox) return;
 
             let targetDate = null;
@@ -1022,20 +990,14 @@
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        
         updateThemeIcon(newTheme);
     }
 
     function updateThemeIcon(theme) {
         const icon = document.getElementById('themeIcon');
-        if (theme === 'light') {
-            icon.className = 'fas fa-sun';
-        } else {
-            icon.className = 'fas fa-moon';
-        }
+        icon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
     }
 
     (function initTheme() {
