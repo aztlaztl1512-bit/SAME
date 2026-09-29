@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة التفسير وعلومه | د. سامي محمد العمر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- مكتبات Firebase اللحظية -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at center, #111827 0%, #050810 100%);
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --primary-glow: #38bdf8;
+            --text-main: #ffffff;
+            --text-sub: #94a3b8;
+            --modal-bg: #111827;
+            --overlay-bg: rgba(5, 8, 16, 0.85);
+            --link-bg: rgba(255, 255, 255, 0.05);
+            --announcement-bg: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
+        }
+
+        [data-theme="light"] {
+            --bg-gradient: radial-gradient(circle at center, #f8fafc 0%, #e2e8f0 100%);
+            --card-glass: rgba(255, 255, 255, 0.7);
+            --border-glass: rgba(148, 163, 184, 0.2);
+            --primary-glow: #0284c7;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --modal-bg: #ffffff;
+            --overlay-bg: rgba(241, 245, 249, 0.85);
+            --link-bg: rgba(241, 245, 249, 0.9);
+            --announcement-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.3s ease, color 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* سحابة جديدة ومختلفة في الخلفية */
+        .cloud-bg-element {
+            position: absolute;
+            top: 40px;
+            right: 5%;
+            font-size: 5rem;
+            color: rgba(56, 189, 248, 0.12);
+            z-index: -1;
+            animation: floatCloud 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes floatCloud {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-glow);
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 15px;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--primary-glow);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            font-weight: 700;
+        }
+
+        .unit-title {
+            color: #0284c7; 
+        }
+
+        /* تنسيقات لوحة الشرف */
+        .leaderboard-section {
+            width: 90%;
+            max-width: 1200px;
+            background: var(--card-glass);
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+            box-shadow: 0 8px 32px rgba(250, 204, 21, 0.08);
+        }
+
+        .leaderboard-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #facc15;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 10px;
+        }
+
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .leader-card {
+            background: var(--link-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-3px);
+            border-color: #facc15;
+        }
+
+        .leader-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rank-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            color: #000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .rank-1 { background: #facc15; color: #000; box-shadow: 0 0 10px rgba(250, 204, 21, 0.5); }
+        .rank-2 { background: #e2e8f0; color: #000; }
+        .rank-3 { background: #b45309; color: #fff; }
+
+        .leader-name {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .leader-score {
+            font-weight: 900;
+            color: #10b981;
+            font-size: 0.9rem;
+            background: rgba(16, 185, 129, 0.15);
+            padding: 3px 8px;
+            border-radius: 8px;
+        }
+
+        .progress-section {
+            width: 90%;
+            max-width: 1200px;
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #10b981, #38bdf8);
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .announcement-banner {
+            width: 90%;
+            max-width: 1200px;
+            background: var(--announcement-bg);
+            border: 2px solid var(--primary-glow);
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-sizing: border-box;
+            animation: pulse-attention 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-attention {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+            50% { transform: scale(1.025); box-shadow: 0 0 35px rgba(56, 189, 248, 0.8), 0 0 10px rgba(250, 204, 21, 0.5); border-color: #facc15; }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: #ffffff;
+            width: 100%;
+        }
+
+        .announcement-icon {
+            font-size: 2.2rem;
+            color: #facc15;
+            animation: ring 1.5s infinite;
+        }
+
+        @keyframes ring {
+            0% { transform: rotate(0); }
+            10% { transform: rotate(15deg); }
+            20% { transform: rotate(-10deg); }
+            30% { transform: rotate(15deg); }
+            40% { transform: rotate(0); }
+        }
+
+        .announcement-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .close-banner-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .close-banner-btn:hover { background: rgba(255, 255, 255, 0.4); transform: scale(1.1); }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 80px;
+        }
+
+        .card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 25px;
+            padding: 35px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-glow);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .icon-box {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            border-radius: 20px;
+            color: white;
+            transition: 0.5s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-grammar { background: linear-gradient(135deg, #38bdf8, #1e40af); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
+        .icon-spelling { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
+        .icon-reading { background: linear-gradient(135deg, #10b981, #064e3b); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
+        .icon-writing { background: linear-gradient(135deg, #8b5cf6, #4c1d95); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
+        .icon-exam { background: linear-gradient(135deg, #ef4444, #991b1b); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
+        .icon-textbook { background: linear-gradient(135deg, #059669, #047857); box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3); }
+        .icon-pdf { background: linear-gradient(135deg, #ec4899, #be185d); box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3); }
+        .icon-summary { background: linear-gradient(135deg, #a855f7, #6b21a8); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
+
+        .card:hover .icon-box { transform: rotateY(360deg); }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            line-height: 1.4;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: var(--modal-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 25px;
+            width: 90%;
+            max-width: 650px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 { margin: 0; font-size: 1.5rem; color: var(--primary-glow); }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover { color: var(--text-main); }
+
+        .links-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .model-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--link-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .model-link:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--primary-glow);
+            transform: translateX(-5px);
+        }
+
+        .model-link i { color: var(--primary-glow); }
+
+        .countdown-timer {
+            font-size: 0.82rem;
+            font-weight: bold;
+            color: #facc15;
+            background: rgba(250, 204, 21, 0.15);
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--link-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            color: var(--text-main);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pdf-actions { display: flex; gap: 10px; }
+
+        .btn-action {
+            padding: 8px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s ease;
+        }
+
+        .btn-view { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+        .btn-view:hover { background: #38bdf8; color: #000; }
+
+        .btn-download { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .btn-download:hover { background: #10b981; color: #000; }
+
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .badge-upcoming { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-active { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-expired { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+        .footer {
+            margin-top: auto;
+            padding: 30px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<!-- سحابة جديدة ومختلفة -->
+<div class="cloud-bg-element">
+    <i class="fas fa-cloud"></i>
+</div>
+
+<button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع">
+    <i class="fas fa-moon" id="themeIcon"></i>
+</button>
+
+<header>
+    <h1>بوابة التفسير وعلومه</h1>
+    <p>مرجع الدراسات الإسلامية - أول ثانوي (نظام المسارات 1448) 📚 - إعداد: د. سامي محمد العمر 🎓</p>
+</header>
+
+<!-- لوحة الشرف التفاعلية للطلاب -->
+<div class="leaderboard-section">
+    <div class="leaderboard-title">
+        <span><i class="fas fa-trophy"></i> 🏆 لوحة الشرف للأبطال (أعلى الدرجات)</span>
+        <span style="font-size: 0.8rem; color: var(--text-sub); font-weight: normal;">تحديث لحظي تلقائي ⚡</span>
+    </div>
+    <div class="leaderboard-grid" id="leaderboardList">
+        <div style="color: var(--text-sub); font-size: 0.9rem;">جاري تحميل أبطال التفسير... ⏳</div>
+    </div>
+</div>
+
+<div class="progress-section">
+    <div class="progress-header">
+        <span><i class="fas fa-chart-line" style="color: #10b981;"></i> نسبة إنجازك في البوابة:</span>
+        <span id="progressText">0% (0 من 0 مكتمل)</span>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+    </div>
+</div>
+
+<div class="announcement-banner" id="announcementBanner">
+    <div class="announcement-content">
+        <i class="fas fa-bullhorn announcement-icon"></i>
+        <p class="announcement-text">
+            📢 تنبيه هام للطلاب: تم تحديث منهج القرآن الكريم وتفسيره (طبعة 1448)، وأصبح الكتاب بصيغة PDF والاختبارات التفاعلية للوحدات متاحة الآن!
+        </p>
+    </div>
+    <button class="close-banner-btn" onclick="closeBanner()" title="إغلاق الإعلان">&times;</button>
+</div>
+
+<div class="container">
+
+    <div class="card" onclick="openModal('unit1-modal')">
+        <div class="icon-box icon-grammar"><i class="fas fa-book-open"></i></div>
+        <h3><span class="unit-title">الوحدة الأولى</span><br>مقدمة في التفسير</h3>
+        <p>التعريف بعلم التفسير، أهميته، ضوابطه، المؤلفات الموثوقة، والتقنية في خدمته.</p>
+    </div>
+
+    <div class="card" onclick="openModal('unit2-modal')">
+        <div class="icon-box icon-spelling"><i class="fas fa-quran"></i></div>
+        <h3><span class="unit-title">الوحدة الثانية والثالثة</span><br>سورة الفاتحة ويونس</h3>
+        <p>استعراض تفسير سورة الفاتحة ومقاطع مختارة من سورة يونس (الآيات 3-10، 26-33، 62-70).</p>
+    </div>
+
+    <div class="card" onclick="openModal('unit4-5-modal')">
+        <div class="icon-box icon-reading"><i class="fas fa-brain"></i></div>
+        <h3><span class="unit-title">الوحدة الرابعة والخامسة</span><br>سورة هود ويوسف</h3>
+        <p>تفسير آيات سور هود (96-123) وسورة يوسف (46-57، 102-111).</p>
+    </div>
+
+    <div class="card" onclick="openModal('unit6-7-8-modal')">
+        <div class="icon-box icon-writing"><i class="fas fa-file-alt"></i></div>
+        <h3><span class="unit-title">الوحدة السادسة والسابعة والثامنة</span><br>الرعد، إبراهيم، والحجر</h3>
+        <p>تفسير مقاطع مختارة من سور الرعد، إبراهيم، والحجر.</p>
+    </div>
+
+    <div class="card" onclick="openModal('unit9-10-modal')">
+        <div class="icon-box icon-exam"><i class="fas fa-tasks"></i></div>
+        <h3><span class="unit-title">الوحدة التاسعة والعاشرة</span><br>سورة النحل والإسراء</h3>
+        <p>تفسير آيات سور النحل والإسراء وفق الخطة الدراسية الفصلية.</p>
+    </div>
+
+    <div class="card" onclick="openModal('textbook-modal')">
+        <div class="icon-box icon-textbook"><i class="fas fa-book"></i></div>
+        <h3>الكتاب المدرسي (PDF)</h3>
+        <p>رابط مباشر لتصفح وتحميل كتاب القرآن الكريم وتفسيره (طبعة 1448) بصيغة PDF.</p>
+    </div>
+
+</div>
+
+<!-- النوافذ المنبثقة للأقسام والوحدات -->
+
+<div id="textbook-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'textbook-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الكتاب المدرسي الرقمي (PDF 1448)</h2>
+            <button class="close-btn" onclick="closeModal('textbook-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <div class="pdf-item">
+                <span><i class="fas fa-file-pdf" style="color: #059669; margin-left: 8px;"></i> كتاب القرآن الكريم وتفسيره - أول ثانوي مسارات (1448)</span>
+                <div class="pdf-actions">
+                    <a href="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" class="btn-action btn-view" target="_blank" onclick="markCompleted('pdf-textbook')">
+                        <i class="fas fa-eye"></i> معاينة وقراءة PDF
+                    </a>
+                    <a href="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" class="btn-action btn-download" download="1448-GE-CBM-TRC1-SM1-QTFSR.pdf" target="_blank" onclick="markCompleted('pdf-textbook')">
+                        <i class="fas fa-download"></i> تحميل
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="unit1-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'unit1-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الوحدة الأولى: مقدمة في التفسير</h2>
+            <button class="close-btn" onclick="closeModal('unit1-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <a class="model-link" data-id="u1-d1" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الأول: التعريف بعلم التفسير ونشأته</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u1-d2" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثاني: أهمية علم التفسير وضوابطه</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u1-d3" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثالث: أبرز المؤلفات الموثوقة في التفسير</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u1-d4" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الرابع: التقنية في خدمة القرآن الكريم وتفسيره</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="unit2-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'unit2-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الوحدة الثانية والثالثة: سورة الفاتحة ويونس</h2>
+            <button class="close-btn" onclick="closeModal('unit2-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <a class="model-link" data-id="u2-d5" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الخامس: تفسير سورة الفاتحة</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u3-d6" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس السادس: تفسير سورة يونس (من آية 3 إلى 10)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u3-d7" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس السابع: تفسير سورة يونس (من آية 26 إلى 33)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u3-d8" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثامن: تفسير سورة يونس (من آية 62 إلى 70)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="unit4-5-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'unit4-5-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الوحدة الرابعة والخامسة: سورة هود ويوسف</h2>
+            <button class="close-btn" onclick="closeModal('unit4-5-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <a class="model-link" data-id="u4-d9" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس التاسع: تفسير سورة هود (من آية 96 إلى 108)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u4-d10" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس العاشر: تفسير سورة هود (من آية 112 إلى 123)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u5-d11" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الحادي عشر: تفسير سورة يوسف (من آية 46 إلى 57)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u5-d12" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثاني عشر: تفسير سورة يوسف (من آية 102 إلى 111)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="unit6-7-8-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'unit6-7-8-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الوحدات (6، 7، 8): الرعد، إبراهيم، والحجر</h2>
+            <button class="close-btn" onclick="closeModal('unit6-7-8-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <a class="model-link" data-id="u6-d13" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثالث عشر: تفسير سورة الرعد (من 8 إلى 15)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u6-d14" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الرابع عشر: تفسير سورة الرعد (من 19 إلى 29)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u7-d15" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الخامس عشر: تفسير سورة إبراهيم (من 24 إلى 31)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u7-d16" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس السادس عشر: تفسير سورة إبراهيم (من 42 إلى 52)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u8-d17" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس السابع عشر: تفسير سورة الحجر (من 28 إلى 50)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u8-d18" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثامن عشر: تفسير سورة الحجر (من 85 إلى 99)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="unit9-10-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'unit9-10-modal')">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>الوحدات (9، 10): النحل والإسراء</h2>
+            <button class="close-btn" onclick="closeModal('unit9-10-modal')">&times;</button>
+        </div>
+        <div class="links-list">
+            <a class="model-link" data-id="u9-d19" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس التاسع عشر: تفسير سورة النحل (من 10 إلى 18)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u9-d20" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس العشرون: تفسير سورة النحل (من 112 إلى 117)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u9-d21" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الحادي والعشرون: تفسير سورة النحل (من 120 إلى 128)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u10-d22" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثاني والعشرون: تفسير سورة الإسراء (من 23 إلى 30)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u10-d23" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الثالث والعشرون: تفسير سورة الإسراء (من 31 إلى 39)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u10-d24" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الرابع والعشرون: تفسير سورة الإسراء (من 78 إلى 87)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+            <a class="model-link" data-id="u10-d25" data-url="https://iencontent.ien.edu.sa/books/1448-GE-CBM-TRC1-SM1-QTFSR.pdf" data-start="2026-09-01T08:00" data-end="2027-01-30T23:59" onclick="handleLinkClick(this)">
+                <span><i class="fas fa-file-signature"></i> الدرس الخامس والعشرون: تفسير سورة الإسراء (من 105 إلى 111)</span>
+                <span class="countdown-timer"></span>
+                <span class="status-box"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    إعداد وتنفيذ: د. سامي محمد العمر - معلم مادة التفسير وعلومه &copy; 2026
+</div>
+
+<script>
+    // إعدادات Firebase من لوحة القيادة الخاصة بك
+    const firebaseConfig = {
+        apiKey: "AIzaSyBkCO7FDQXd89YDf843J4_AtvEFvzzt-R0",
+        authDomain: "aztlg-494c3.firebaseapp.com",
+        projectId: "aztlg-494c3",
+        storageBucket: "aztlg-494c3.firebasestorage.app",
+        messagingSenderId: "597051893949",
+        appId: "1:597051893949:web:de5554ac900317a92b2fd4"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // الاستماع اللحظي لوحة الشرف
+    function initLeaderboard() {
+        db.collection("alkfaeat_results").onSnapshot(snapshot => {
+            let studentsMap = {};
+
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                if (!data.name || data.score === undefined || !data.total) return;
+
+                let pct = Math.round((data.score / data.total) * 100);
+                
+                if (!studentsMap[data.name] || pct > studentsMap[data.name].pct) {
+                    studentsMap[data.name] = {
+                        name: data.name,
+                        score: data.score,
+                        total: data.total,
+                        pct: pct
+                    };
+                }
+            });
+
+            let sortedList = Object.values(studentsMap).sort((a, b) => b.pct - a.pct);
+            let topStudents = sortedList.slice(0, 6);
+
+            const container = document.getElementById('leaderboardList');
+            if (topStudents.length === 0) {
+                container.innerHTML = `<div style="color: var(--text-sub);">لا توجد نتائج مسجلة حتى الآن. كن أول الأبطال! 🌟</div>`;
+                return;
+            }
+
+            let html = "";
+            topStudents.forEach((st, index) => {
+                let rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+                let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '⭐';
+
+                html += `
+                    <div class="leader-card">
+                        <div class="leader-info">
+                            <div class="rank-badge ${rankClass}">${index + 1}</div>
+                            <div class="leader-name">${medal} ${st.name}</div>
+                        </div>
+                        <div class="leader-score">${st.score} من ${st.total} (${st.pct}%)</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        });
+    }
+
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+        updateAllBadges();
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function closeModalOnOuterClick(event, modalId) {
+        if (event.target.id === modalId) {
+            closeModal(modalId);
+        }
+    }
+
+    function closeBanner() {
+        document.getElementById('announcementBanner').style.display = 'none';
+    }
+
+    function handleLinkClick(element) {
+        const url = element.getAttribute('data-url');
+        const itemId = element.getAttribute('data-id');
+        const startTimeStr = element.getAttribute('data-start');
+        const endTimeStr = element.getAttribute('data-end');
+        const now = new Date();
+
+        if (startTimeStr) {
+            const startTime = new Date(startTimeStr);
+            if (now < startTime) {
+                alert(`سيكون هذا الرابط متاحاً قريباً بإذن الله ⏳\nموعد الفتح: ${startTime.toLocaleString('ar-SA')}`);
+                return;
+            }
+        }
+
+        if (endTimeStr) {
+            const endTime = new Date(endTimeStr);
+            if (now > endTime) {
+                alert('عذراً، انتهت الفترة المحددة لهذا الرابط وهو مغلق حالياً 🔒');
+                return;
+            }
+        }
+
+        if (itemId) markCompleted(itemId);
+        window.open(url, '_blank');
+    }
+
+    function markCompleted(id) {
+        let completedList = JSON.parse(localStorage.getItem('student_completed_tafsir_items') || '[]');
+        if (!completedList.includes(id)) {
+            completedList.push(id);
+            localStorage.setItem('student_completed_tafsir_items', JSON.stringify(completedList));
+            updateProgressBar();
+        }
+    }
+
+    function updateProgressBar() {
+        const totalLinks = document.querySelectorAll('.model-link').length + document.querySelectorAll('.pdf-item').length;
+        let completedList = JSON.parse(localStorage.getItem('student_completed_tafsir_items') || '[]');
+        let completedCount = completedList.length;
+        let percentage = totalLinks > 0 ? Math.min(Math.round((completedCount / totalLinks) * 100), 100) : 0;
+
+        document.getElementById('progressBarFill').style.width = percentage + '%';
+        document.getElementById('progressText').innerText = `${percentage}% (${completedCount} من ${totalLinks} مكتمل)`;
+    }
+
+    function updateAllBadges() {
+        const links = document.querySelectorAll('.model-link');
+        const now = new Date();
+
+        links.forEach(link => {
+            const startStr = link.getAttribute('data-start');
+            const endStr = link.getAttribute('data-end');
+            const statusBox = link.querySelector('.status-box');
+            const timerBox = link.querySelector('.countdown-timer');
+            
+            if (!statusBox || !timerBox) return;
+
+            let targetDate = null;
+            let timerPrefix = "";
+
+            if (startStr && new Date(startStr) > now) {
+                statusBox.innerHTML = `<span class="status-badge badge-upcoming">قريباً ⏳</span><i class="fas fa-lock"></i>`;
+                targetDate = new Date(startStr);
+                timerPrefix = "يفتح بعد: ";
+            } else if (endStr && new Date(endStr) < now) {
+                statusBox.innerHTML = `<span class="status-badge badge-expired">مغلق 🔒</span><i class="fas fa-times-circle"></i>`;
+                timerBox.style.display = 'none';
+                return;
+            } else if (endStr) {
+                statusBox.innerHTML = `<span class="status-badge badge-active">متاح الآن 🟢</span><i class="fas fa-external-link-alt"></i>`;
+                targetDate = new Date(endStr);
+                timerPrefix = "يغلق بعد: ";
+            }
+
+            if (targetDate) {
+                const diff = targetDate - now;
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    let timeString = timerPrefix;
+                    if (days > 0) timeString += `${days}ي `;
+                    timeString += `${hours}س ${minutes}د ${seconds}ث`;
+
+                    timerBox.innerText = timeString;
+                    timerBox.style.display = 'inline-flex';
+                } else {
+                    timerBox.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+        const icon = document.getElementById('themeIcon');
+        if (theme === 'light') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    }
+
+    (function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        updateAllBadges();
+        updateProgressBar();
+        initLeaderboard();
+        setInterval(updateAllBadges, 1000);
+    })();
+</script>
+
+</body>
+</html>
